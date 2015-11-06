@@ -8,6 +8,7 @@ import becker.*;
 public class Main {
     public static void main(String[] args)
     {
+        ReasonableFrame frame = new ReasonableFrame("Pac Robot");
         
     }
 }
