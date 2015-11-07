@@ -6,22 +6,60 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
+package assignment3;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+
+import becker.robots.Direction;
+
 public class MenuCity extends CityInFrame {
+	JButton pick;
+	JButton left;
+	JButton right;
+	JButton up;
+	JButton down;
+	JPanel panel;
 	
 	public MenuCity() {
         super();
+    }
+	
+	public void restart() {
+//		frame.remove(mainpanel);
+        addMainPanel();
+        addCity();
+        addMenu();
+        addButtons();
+        
     }
 
 	public JMenu makeActionsMenu() {
 
         // first create the menu items..
-        JMenuItem pr = new JMenuItem("Pause/ Restart");
+        JButton pr = new JButton("Pause/ Restart");
         
-
+//        JButton ss = new JButton();
+//        ss = roboComps.getStartStopButton();
+//        ss.doClick();
+//        
+//        JButton restart = new JButton("Restart");
+//        restart.addActionListener(new RestartListener(this));
+        
         // then add them to the menu
         JMenu actions = new JMenu("Actions");
         actions.add(pr);
-        
+  //      actions.add(restart);
+                      
         return actions;
     }
 	
@@ -65,7 +103,152 @@ public class MenuCity extends CityInFrame {
 	        frame.setJMenuBar(menuBar);
 
 	        frame.pack(); // show the menu now, please
+	     	}
+	
+	 public void addButtons() {
+		 	
+	     	up = new JButton("Up");   
+	        bc.gridx = 3;
+	        bc.gridy = 0;
+	        up.setPreferredSize(new Dimension(80, 40));
+	        secondPanel.add(up,bc);
+	        up.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Direction d = player.getDirection();
+					
+					switch (d) {
+					case NORTH:
+						player.move();
+						break;
+					case SOUTH:
+						player.turnAround();
+						break;
+					case EAST:
+						player.turnLeft();
+						break;
+					case WEST:
+						player.turnRight();
+						break;
+					default:
+						break;
+					}
+					
+					
+				}
+			});
+	        pick = new JButton("Pick");	
+	      	bc.gridx = 3;
+		    bc.gridy = 1;
+		    pick.setPreferredSize(new Dimension(80, 40));
+		    secondPanel.add(pick, bc);
+		    pick.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					player.pickThing();
+					
+				}
+			});
+		    
+		    left = new JButton("Left");       
+	        bc.gridx = 2;
+	        bc.gridy = 1;
+	        left.setPreferredSize(new Dimension(80, 40));
+	        secondPanel.add(left, bc);
+	        left.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Direction d = player.getDirection();
+					
+					switch (d) {
+					case NORTH:
+						player.turnLeft();
+						break;
+					case SOUTH:
+						player.turnRight();
+						break;
+					case EAST:
+						player.turnAround();
+						break;
+					case WEST:
+						player.move();
+						break;
+					default:
+						break;
+					}
+					
+					
+				}
+			});
+	        
+	        right = new JButton("Right");
+	        bc.gridx = 4;
+	        bc.gridy = 1;
+	        right.setPreferredSize(new Dimension(80, 40));
+	        secondPanel.add(right, bc);
+	        right.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Direction d = player.getDirection();
+					
+					switch (d) {
+					case NORTH:
+						player.turnRight();
+						break;
+					case SOUTH:
+						player.turnLeft();
+						break;
+					case EAST:
+						player.move();
+						break;
+					case WEST:
+						player.turnAround();
+						break;
+					default:
+						break;
+					}
+					
+					
+				}
+			});
+	        
+	        down = new JButton("Down");
+	        bc.gridx = 3;
+	        bc.gridy = 2;
+	        down.setPreferredSize(new Dimension(80, 40));
+	        secondPanel.add(down, bc);
+	        down.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Direction d = player.getDirection();
+					
+					switch (d) {
+					case NORTH:
+						player.turnAround();
+						break;
+					case SOUTH:
+						player.move();
+						break;
+					case EAST:
+						player.turnRight();
+						break;
+					case WEST:
+						player.turnLeft();
+						break;
+					default:
+						break;
+					}
+					
+					
+				}
+			});
+	       
+	        secondPanel.validate();
+	 } 
+}
 
-	    
-}
-}
