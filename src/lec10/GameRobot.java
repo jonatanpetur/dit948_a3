@@ -1,4 +1,5 @@
 import becker.robots.*;
+import dit948_a3.ThreadedRobot;
 
 import static dit948.Random.*;
 

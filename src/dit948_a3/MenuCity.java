@@ -1,82 +1,71 @@
 package dit948_a3;
-import javax.swing.*;
 
-import java.awt.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
-import becker.robots.*;
-
-
-public class MenuCity extends LayoutGallery {
-
-    public MenuCity() {
+public class MenuCity extends CityInFrame {
+	
+	public MenuCity() {
         super();
     }
 
-    public JMenu makeActionsMenu() {
+	public JMenu makeActionsMenu() {
 
         // first create the menu items..
-        JMenuItem restart = new JMenuItem("Restart");
-        JMenuItem quit = new JMenuItem("Quit");
+        JMenuItem pr = new JMenuItem("Pause/ Restart");
+        
 
         // then add them to the menu
         JMenu actions = new JMenu("Actions");
-        actions.add(restart);
-        actions.add(quit);
+        actions.add(pr);
+        
         return actions;
     }
-
-    public JMenu makeSettingsMenu() {
+	
+	public JMenu makeSettingsMenu() {
         // create the menu items
-        JRadioButtonMenuItem one = new JRadioButtonMenuItem("1");
-        JRadioButtonMenuItem ten = new JRadioButtonMenuItem("10");
-        ten.setSelected(true); // ten bombs by default
-        JRadioButtonMenuItem twenty = new JRadioButtonMenuItem("20");
+        JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
+        JRadioButtonMenuItem medium = new JRadioButtonMenuItem("Medium");
+        medium.setSelected(true); // ten bombs by default
+        JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
 
         // new step: put buttons in a group, so that we know only
         // one of them can be selected at a time
         ButtonGroup settingsGroup = new ButtonGroup();
-        settingsGroup.add(one);
-        settingsGroup.add(ten);
-        settingsGroup.add(twenty);
+        settingsGroup.add(easy);
+        settingsGroup.add(medium);
+        settingsGroup.add(hard);
 
         // add the items to the menu
         // (Hey Java, why can't I just add the group?)
         JMenu settings = new JMenu("Settings");
-        settings.add(one);
-        settings.add(ten);
-        settings.add(twenty);
+        settings.add(easy);
+        settings.add(medium);
+        settings.add(hard);
         return settings;
     }
+	 public void addMenu() {
 
-    public void addMenu() {
+	        JMenuBar menuBar = new JMenuBar();
 
-        JMenuBar menuBar = new JMenuBar();
+	        JMenu actions = makeActionsMenu(); 
+	        menuBar.add(actions);
 
-        JMenu actions = makeActionsMenu(); 
-        menuBar.add(actions);
+	        // Once again for the settings menu
 
-        // Once again for the settings menu
+	        JMenu settings = makeSettingsMenu();
+	        // add the menu to the menu bar
+	        menuBar.add(settings);
 
-        JMenu settings = makeSettingsMenu();
-        // add the menu to the menu bar
-        menuBar.add(settings);
+	        // finally, add the menu bar to the frame
 
-        // finally, add the menu bar to the frame
+	        frame.setJMenuBar(menuBar);
 
-        frame.setJMenuBar(menuBar);
+	        frame.pack(); // show the menu now, please
 
-        frame.pack(); // show the menu now, please
-
-    }
-        
-    public static void main(String[] args) {
-
-        MenuCity framedCity = new MenuCity();
-
-        framedCity.addCity();
-        framedCity.addStartStop();
-        framedCity.addMenu();
-
-    }
-
+	    
+}
 }
