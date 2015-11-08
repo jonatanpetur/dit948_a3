@@ -21,6 +21,7 @@ public class MenuCity extends CityInFrame {
 	JButton up;
 	JButton down;
 	JPanel panel;
+	JButton ss;
 	
 	public MenuCity() {
         super();
@@ -37,12 +38,20 @@ public class MenuCity extends CityInFrame {
 
 	public JMenu makeActionsMenu() {
 
-        // first create the menu items..
-        JButton pr = new JButton("Pause/ Restart");
-        
-        JButton ss = new JButton();
+        // first create the menu items..        
+        ss = new JButton();
         ss = roboComps.getStartStopButton();
         ss.doClick();
+        
+        JButton pr = new JButton("Pause/ Restart");
+        pr.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ss.doClick();
+			}
+		});
         
         JButton restart = new JButton("Restart");
         restart.addActionListener(new RestartListener(this));
