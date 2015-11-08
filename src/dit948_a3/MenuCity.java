@@ -104,7 +104,9 @@ public class MenuCity extends CityInFrame {
 	        bc.gridy = 0;
 	        up.setPreferredSize(new Dimension(80, 40));
 	        secondPanel.add(up,bc);
-	        up.addActionListener(new MoveUp());
+	        up.addActionListener((ActionEvent evt)->{
+				player.moveUp();
+				});
 	        
 	        pick = new JButton("Pick");	
 	      	bc.gridx = 3;
@@ -125,31 +127,8 @@ public class MenuCity extends CityInFrame {
 	        bc.gridy = 1;
 	        left.setPreferredSize(new Dimension(80, 40));
 	        secondPanel.add(left, bc);
-	        left.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Direction d = player.getDirection();
-					
-					switch (d) {
-					case NORTH:
-						player.turnLeft();
-						break;
-					case SOUTH:
-						player.turnRight();
-						break;
-					case EAST:
-						player.turnAround();
-						break;
-					case WEST:
-						player.move();
-						break;
-					default:
-						break;
-					}
-					
-					
-				}
+	        left.addActionListener((ActionEvent e) ->{
+				player.moveLeft();
 			});
 	        
 	        right = new JButton("Right");
@@ -157,63 +136,17 @@ public class MenuCity extends CityInFrame {
 	        bc.gridy = 1;
 	        right.setPreferredSize(new Dimension(80, 40));
 	        secondPanel.add(right, bc);
-	        right.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Direction d = player.getDirection();
-					
-					switch (d) {
-					case NORTH:
-						player.turnRight();
-						break;
-					case SOUTH:
-						player.turnLeft();
-						break;
-					case EAST:
-						player.move();
-						break;
-					case WEST:
-						player.turnAround();
-						break;
-					default:
-						break;
-					}
-					
-					
-				}
+	        right.addActionListener((ActionEvent evt)->{
+				player.moveRight();
 			});
-	        
+
 	        down = new JButton("Down");
 	        bc.gridx = 3;
 	        bc.gridy = 2;
 	        down.setPreferredSize(new Dimension(80, 40));
 	        secondPanel.add(down, bc);
-	        down.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Direction d = player.getDirection();
-					
-					switch (d) {
-					case NORTH:
-						player.turnAround();
-						break;
-					case SOUTH:
-						player.move();
-						break;
-					case EAST:
-						player.turnRight();
-						break;
-					case WEST:
-						player.turnLeft();
-						break;
-					default:
-						break;
-					}
-					
-					
-				}
+	        down.addActionListener((ActionEvent evt)->{
+			 player.moveDown();
 			});
 	       
 	        secondPanel.validate();
