@@ -1,6 +1,7 @@
 package dit948_a3;
 
 import becker.robots.*;
+import test.ImageIcon;
 
 import static dit948.Random.*;
 
@@ -25,8 +26,9 @@ public class PrizeCity extends City {
     void distributePrizes() {
 
       
-           Prize p = new Prize(this, randomInt(size), randomInt(size));
+            Prize p = new Prize(this, randomInt(size), randomInt(size));
             p.setIcon(new ImageIcon());
+
         }
     
 

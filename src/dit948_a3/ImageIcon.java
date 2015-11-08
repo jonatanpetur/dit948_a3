@@ -16,8 +16,8 @@ public class ImageIcon extends Icon {
     protected void paintIcon(Graphics graphics) {
         try
         {
-            File f = new File("prize.jpeg");
-            System.err.println(f.getAbsolutePath());
+            File f = new File("images/prize.jpeg");
+           // System.err.println(f.getAbsolutePath());
             BufferedImage bi = ImageIO.read(f);
             Image img = bi.getScaledInstance(100,100,Image.SCALE_SMOOTH);
             BufferedImage bi2 = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);

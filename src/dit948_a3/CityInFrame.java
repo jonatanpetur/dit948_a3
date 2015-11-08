@@ -23,6 +23,7 @@ import becker.robots.*;
 	    JPanel secondPanel;
 	    GridBagConstraints bc = new GridBagConstraints();
 	    PlayerRobot player;
+	    ThreadedRobot rob;
 	    
 	    
 	    public CityInFrame() {
@@ -47,9 +48,10 @@ import becker.robots.*;
 	        
 	        prizeCity = new PrizeCity(size, prize);
 	        
-	        ThreadedRobot rob = new ThreadedRobot(prizeCity,(int) Math.random()*size,(int) Math.random()*size, Direction.NORTH);
+	        rob = new ThreadedRobot(prizeCity,(int) (Math.random()*size),(int) (Math.random()*size), Direction.NORTH);
 	        player = new PlayerRobot(prizeCity,5,5,Direction.SOUTH);
 	        player.move(0);
+	        rob.setSpeed(player.getSpeed() / 5);
 	        roboComps = new RobotUIComponents(prizeCity, 0, 0, size, size);
 
 	        CityView view = roboComps.getCityView();
@@ -58,6 +60,7 @@ import becker.robots.*;
 	        Thread robThread = new Thread(rob);
 	        robThread.start();
 	        //playerThread.start();
+	        
 	        
 	        frame.pack();
 	        frame.setVisible(true);

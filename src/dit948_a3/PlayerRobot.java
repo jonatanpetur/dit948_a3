@@ -2,13 +2,18 @@ package dit948_a3;
 
 import becker.robots.City;
 import becker.robots.Direction;
+import becker.robots.IPredicate;
 
-public class PlayerRobot extends SmartRobot {
-	
+public class PlayerRobot extends ThreadedRobot {
 	public PlayerRobot(City c, int st, int av, Direction d) {
         super(c, st, av, d);
     }
-
+	
+	public void breakRobot()
+    {
+        super.breakRobot("Oh no!");
+    }
+	
     public void moveUp()
     {
         Direction d = this.getDirection();
@@ -91,7 +96,6 @@ public class PlayerRobot extends SmartRobot {
                 break;
         }
     }
-
     @Override
     public void turnRight() {
         Thread t = new Thread(() -> {
@@ -120,8 +124,17 @@ public class PlayerRobot extends SmartRobot {
     @Override
     public void move() {
         Thread t = new Thread(() -> {
-            super.move();
+        	super.move();
         });
         t.start();
     }
+    
+    
+  public boolean isWinner(){
+	  if(this.countThingsInBackpack() == 1){
+		  System.out.println("Winner!!!");
+		  return true;
+	  }
+	  return false;
+  }
 }

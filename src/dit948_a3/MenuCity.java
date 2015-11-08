@@ -1,5 +1,6 @@
 package dit948_a3;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,20 +26,46 @@ public class MenuCity extends CityInFrame {
 	JPanel panel;
 	JButton ss;
 	JButton restart;
+	JRadioButtonMenuItem easy;
+	JRadioButtonMenuItem medium;
+	JRadioButtonMenuItem hard;
 	
 	public MenuCity() {
         super();
     }
 	
-	public void restart() {
+	public void restart(String dificulty) {
 //		frame.remove(mainpanel);
         addMainPanel();
         addCity();
         addMenu();
         addButtons();
+        switch(dificulty){
+        case "Easy":
+        easy.setSelected(true);
+        rob.setColor(Color.MAGENTA);
+        double speedEasy = player.getSpeed() / 5;
+        rob.setSpeed(speedEasy);
+        System.out.println(rob.getSpeed());
+        break;
+        case "Medium":
+        medium.setSelected(true);
+        rob.setColor(Color.BLUE);
+        double speedMedium = player.getSpeed() / 2;
+        rob.setSpeed(speedMedium);
+        System.out.println(rob.getSpeed());
+        break;
+        case "Hard":
+        hard.setSelected(true);
+        rob.setColor(Color.BLACK);
+        rob.setSpeed(player.getSpeed());
+        System.out.println(rob.getSpeed());
+        break;   
+        }
+
+        
         
     }
-
 	public JMenu makeActionsMenu() {
 
         // first create the menu items..        
@@ -69,39 +96,38 @@ public class MenuCity extends CityInFrame {
 	
 	public JMenu makeSettingsMenu() {
         // create the menu items
-        JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
-        easy.setSelected(true); // ten bombs by default
+        easy = new JRadioButtonMenuItem("Easy");
+        medium = new JRadioButtonMenuItem("Medium");
+        hard = new JRadioButtonMenuItem("Hard");
         easy.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				double playerS = player.getSpeed();
-				rob.setSpeed(playerS / 5);
+				restart("Easy");
 			}
 		});
-        JRadioButtonMenuItem medium = new JRadioButtonMenuItem("Medium");
         medium.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				double playerS = player.getSpeed();
-				rob.setSpeed(playerS / 2);
+				restart("Medium");
+				//rob.setSpeed(player.getSpeed() / 2);
 
 			}
 		});
-        JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
         hard.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				double playerS = player.getSpeed();
-				rob.setSpeed(playerS);
+				restart("Hard");
+				//rob.setSpeed(player.getSpeed());
 
 			}
 		});
+        easy.setSelected(true);
 
         // new step: put buttons in a group, so that we know only
         // one of them can be selected at a time

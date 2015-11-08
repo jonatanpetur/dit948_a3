@@ -10,20 +10,33 @@ public class RandomRobot extends SmartRobot {
     }
 
     public void randomMove() {
-        int nrTurns = randomInt(4);
-        double speed = getSpeed();
+    	int nrTurns = randomInt(4);
+        //double speed = this.getSpeed();
         if (nrTurns > 0)
-            setSpeed(nrTurns*speed);
+           //setSpeed(nrTurns*speed);
         for (int i = 0; i < nrTurns; i++)
             turnLeft();
-        setSpeed(speed);
+      // setSpeed(speed);
         move();
+        this.getCity().examineRobots().forEach(robot -> {
+            if(this.getIntersection() == robot.getIntersection() && this != robot)
+            {
+                try{
+                    PlayerRobot pr = (PlayerRobot)robot;
+                    pr.breakRobot(null);
+                }catch(ClassCastException cs)
+                {
+                    ;
+                }
+            }
+        });
     }
 
     public void go(int steps) {
         for(int i = 0; i != steps; i++) { // a potentially infinite loop
-           // pickThing();
-            randomMove();
+           pickThing();
+           randomMove();
+           
         }
     }
 

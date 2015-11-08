@@ -16,9 +16,7 @@ public class Prize extends Thing {
 	        super(city, st, av);
 	        setCanBeCarried(true);       
 	  }
-
-
-
+	
 	        
 	        
 

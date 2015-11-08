@@ -10,12 +10,12 @@ public class SmartRobot extends Robot {
     }
 
     public void turnRight() {
-        double speed = getSpeed();
-        setSpeed(3 * speed);
+      //double speed = this.getSpeed();
+      //setSpeed(3 * speed);
         turnLeft();
         turnLeft();
         turnLeft();
-        setSpeed(speed);
+      //setSpeed(speed);
     }
 
     public void putThing() {
@@ -32,11 +32,11 @@ public class SmartRobot extends Robot {
             super.move();
     }
     public void turnAround() {
-        double speed = getSpeed();
-        setSpeed(2 * speed);
+       // double speed = getSpeed();
+        //setSpeed(2 * speed);
         turnLeft();
         turnLeft();
-        setSpeed(speed);
+       // setSpeed(speed);
     }
 
     public void move(int nrSteps) {
@@ -45,5 +45,5 @@ public class SmartRobot extends Robot {
             move();
         }
     }
-
+    
 }
