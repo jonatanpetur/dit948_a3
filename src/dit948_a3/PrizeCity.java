@@ -25,7 +25,8 @@ public class PrizeCity extends City {
     void distributePrizes() {
 
       
-            new Prize(this, randomInt(size), randomInt(size));
+           Prize p = new Prize(this, randomInt(size), randomInt(size));
+            p.setIcon(new ImageIcon());
         }
     
 
