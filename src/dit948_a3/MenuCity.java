@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -15,6 +16,7 @@ import javax.swing.JRadioButtonMenuItem;
 import becker.robots.Direction;
 
 public class MenuCity extends CityInFrame {
+	//private static final AbstractButton  = null;
 	JButton pick;
 	JButton left;
 	JButton right;
@@ -22,6 +24,7 @@ public class MenuCity extends CityInFrame {
 	JButton down;
 	JPanel panel;
 	JButton ss;
+	JButton restart;
 	
 	public MenuCity() {
         super();
@@ -53,7 +56,7 @@ public class MenuCity extends CityInFrame {
 			}
 		});
         
-        JButton restart = new JButton("Restart");
+        restart = new JButton("Restart");
         restart.addActionListener(new RestartListener(this));
         
         // then add them to the menu
@@ -67,9 +70,38 @@ public class MenuCity extends CityInFrame {
 	public JMenu makeSettingsMenu() {
         // create the menu items
         JRadioButtonMenuItem easy = new JRadioButtonMenuItem("Easy");
+        easy.setSelected(true); // ten bombs by default
+        easy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				double playerS = player.getSpeed();
+				rob.setSpeed(playerS / 5);
+			}
+		});
         JRadioButtonMenuItem medium = new JRadioButtonMenuItem("Medium");
-        medium.setSelected(true); // ten bombs by default
+        medium.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				double playerS = player.getSpeed();
+				rob.setSpeed(playerS / 2);
+
+			}
+		});
         JRadioButtonMenuItem hard = new JRadioButtonMenuItem("Hard");
+        hard.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				double playerS = player.getSpeed();
+				rob.setSpeed(playerS);
+
+			}
+		});
 
         // new step: put buttons in a group, so that we know only
         // one of them can be selected at a time
