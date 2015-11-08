@@ -97,7 +97,7 @@ public class PlayerRobot extends SmartRobot {
         Thread t = new Thread(() -> {
             super.turnRight();
         });
-        t.run();
+        t.start();
 
     }
 
@@ -106,7 +106,7 @@ public class PlayerRobot extends SmartRobot {
         Thread t = new Thread(() -> {
             super.turnLeft();
         });
-        t.run();
+        t.start();
     }
 
     @Override
@@ -114,7 +114,7 @@ public class PlayerRobot extends SmartRobot {
         Thread t = new Thread(() -> {
             super.turnAround();
         });
-        t.run();
+        t.start();
     }
 
     @Override
@@ -122,6 +122,6 @@ public class PlayerRobot extends SmartRobot {
         Thread t = new Thread(() -> {
             super.move();
         });
-        t.run();
+        t.start();
     }
 }
