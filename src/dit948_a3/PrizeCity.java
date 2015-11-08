@@ -2,7 +2,7 @@ package dit948_a3;
 
 import becker.robots.*;
 
-import static dit948_a3.Random.*;
+import static dit948.Random.*;
 
 public class PrizeCity extends City {
 

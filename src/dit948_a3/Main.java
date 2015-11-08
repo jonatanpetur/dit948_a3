@@ -9,6 +9,7 @@ public class Main {
         framedCity.addCity();
         framedCity.addMenu();
         framedCity.addButtons();
+
     }
 
 }

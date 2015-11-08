@@ -1,13 +1,5 @@
 package dit948_a3;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-
-package assignment3;
-
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,17 +40,17 @@ public class MenuCity extends CityInFrame {
         // first create the menu items..
         JButton pr = new JButton("Pause/ Restart");
         
-//        JButton ss = new JButton();
-//        ss = roboComps.getStartStopButton();
-//        ss.doClick();
-//        
-//        JButton restart = new JButton("Restart");
-//        restart.addActionListener(new RestartListener(this));
+        JButton ss = new JButton();
+        ss = roboComps.getStartStopButton();
+        ss.doClick();
+        
+        JButton restart = new JButton("Restart");
+        restart.addActionListener(new RestartListener(this));
         
         // then add them to the menu
         JMenu actions = new JMenu("Actions");
         actions.add(pr);
-  //      actions.add(restart);
+        actions.add(restart);
                       
         return actions;
     }
@@ -112,32 +104,8 @@ public class MenuCity extends CityInFrame {
 	        bc.gridy = 0;
 	        up.setPreferredSize(new Dimension(80, 40));
 	        secondPanel.add(up,bc);
-	        up.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Direction d = player.getDirection();
-					
-					switch (d) {
-					case NORTH:
-						player.move();
-						break;
-					case SOUTH:
-						player.turnAround();
-						break;
-					case EAST:
-						player.turnLeft();
-						break;
-					case WEST:
-						player.turnRight();
-						break;
-					default:
-						break;
-					}
-					
-					
-				}
-			});
+	        up.addActionListener(new MoveUp());
+	        
 	        pick = new JButton("Pick");	
 	      	bc.gridx = 3;
 		    bc.gridy = 1;
@@ -251,4 +219,3 @@ public class MenuCity extends CityInFrame {
 	        secondPanel.validate();
 	 } 
 }
-
