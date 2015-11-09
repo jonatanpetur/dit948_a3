@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.BrokenBarrierException;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -11,10 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 
 import becker.robots.Direction;
+import becker.robots.icons.BrokenIcon;
 
 public class MenuCity extends CityInFrame {
 	//private static final AbstractButton  = null;
@@ -46,20 +49,17 @@ public class MenuCity extends CityInFrame {
         rob.setColor(Color.MAGENTA);
         double speedEasy = player.getSpeed() / 5;
         rob.setSpeed(speedEasy);
-        System.out.println(rob.getSpeed());
         break;
         case "Medium":
         medium.setSelected(true);
         rob.setColor(Color.BLUE);
         double speedMedium = player.getSpeed() / 2;
         rob.setSpeed(speedMedium);
-        System.out.println(rob.getSpeed());
         break;
         case "Hard":
         hard.setSelected(true);
         rob.setColor(Color.BLACK);
         rob.setSpeed(player.getSpeed());
-        System.out.println(rob.getSpeed());
         break;   
         }
 
@@ -73,7 +73,7 @@ public class MenuCity extends CityInFrame {
         ss = roboComps.getStartStopButton();
         ss.doClick();
         
-        JButton pr = new JButton("Pause/ Restart");
+        JMenuItem pr = new JMenuItem("Pause/ Restart");
         pr.addActionListener(new ActionListener() {
 			
 			@Override
@@ -83,13 +83,10 @@ public class MenuCity extends CityInFrame {
 			}
 		});
         
-        restart = new JButton("Restart");
-        restart.addActionListener(new RestartListener(this));
         
         // then add them to the menu
         JMenu actions = new JMenu("Actions");
         actions.add(pr);
-        actions.add(restart);
                       
         return actions;
     }
@@ -185,6 +182,17 @@ public class MenuCity extends CityInFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					player.pickThing();
+					if(player.countThingsInBackpack() > 0){
+						ss.doClick();
+						rob.setIcon(new BrokenIcon(rob.getIcon()));
+						int choice = JOptionPane.showConfirmDialog(null, "You Win! \n Restart game?", "Game Over", JOptionPane.YES_NO_OPTION);
+			            if (choice == JOptionPane.YES_OPTION){
+			            	restart("Easy");
+			            }
+			            else{
+			                System.exit(0);
+			            }
+					}
 					
 				}
 			});

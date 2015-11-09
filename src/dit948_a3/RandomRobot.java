@@ -3,6 +3,8 @@ import becker.robots.*;
 import static dit948.Random.*;
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
+
 public class RandomRobot extends SmartRobot {
 	
 	public RandomRobot(City c, int st, int av, Direction d) {
@@ -10,6 +12,18 @@ public class RandomRobot extends SmartRobot {
     }
 
     public void randomMove() {
+    	this.getCity().examineRobots().forEach(robot -> {
+            if(this.getIntersection() == robot.getIntersection() && this != robot)
+            {            	
+                try{
+                    PlayerRobot pr = (PlayerRobot)robot;
+                    pr.breakRobot();
+                }catch(ClassCastException cs)
+                {
+                    ;
+                }
+            }
+        });
     	int nrTurns = randomInt(4);
         //double speed = this.getSpeed();
         if (nrTurns > 0)
@@ -18,18 +32,7 @@ public class RandomRobot extends SmartRobot {
             turnLeft();
       // setSpeed(speed);
         move();
-        this.getCity().examineRobots().forEach(robot -> {
-            if(this.getIntersection() == robot.getIntersection() && this != robot)
-            {
-                try{
-                    PlayerRobot pr = (PlayerRobot)robot;
-                    pr.breakRobot(null);
-                }catch(ClassCastException cs)
-                {
-                    ;
-                }
-            }
-        });
+        
     }
 
     public void go(int steps) {

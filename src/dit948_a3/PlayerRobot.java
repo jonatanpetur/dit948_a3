@@ -1,10 +1,16 @@
 package dit948_a3;
 
+import javax.swing.JOptionPane;
+
 import becker.robots.City;
 import becker.robots.Direction;
 import becker.robots.IPredicate;
+import becker.robots.icons.BrokenIcon;
+import becker.robots.icons.Icon;
 
-public class PlayerRobot extends ThreadedRobot {
+public class PlayerRobot extends SmartRobot
+{
+	
 	public PlayerRobot(City c, int st, int av, Direction d) {
         super(c, st, av, d);
     }
@@ -124,17 +130,10 @@ public class PlayerRobot extends ThreadedRobot {
     @Override
     public void move() {
         Thread t = new Thread(() -> {
+        	if(this.frontIsClear()){
         	super.move();
+        	}
         });
         t.start();
-    }
-    
-    
-  public boolean isWinner(){
-	  if(this.countThingsInBackpack() == 1){
-		  System.out.println("Winner!!!");
-		  return true;
-	  }
-	  return false;
-  }
-}
+    }   
+ }

@@ -49,13 +49,14 @@ import becker.robots.*;
 	        prizeCity = new PrizeCity(size, prize);
 	        
 	        rob = new ThreadedRobot(prizeCity,(int) (Math.random()*size),(int) (Math.random()*size), Direction.NORTH);
+	        rob.setColor(Color.MAGENTA);
 	        player = new PlayerRobot(prizeCity,5,5,Direction.SOUTH);
 	        player.move(0);
 	        rob.setSpeed(player.getSpeed() / 5);
 	        roboComps = new RobotUIComponents(prizeCity, 0, 0, size, size);
 
 	        CityView view = roboComps.getCityView();
-
+	        
 	        firstPanel.add(view);
 	        Thread robThread = new Thread(rob);
 	        robThread.start();
