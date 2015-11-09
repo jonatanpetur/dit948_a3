@@ -4,21 +4,30 @@ import javax.swing.JOptionPane;
 
 import becker.robots.City;
 import becker.robots.Direction;
-import becker.robots.IPredicate;
-import becker.robots.icons.BrokenIcon;
-import becker.robots.icons.Icon;
 
-public class PlayerRobot extends SmartRobot
-{
+public class PlayerRobot extends SmartRobot{
 	
-	public PlayerRobot(City c, int st, int av, Direction d) {
+	MenuCity g;
+		
+	public PlayerRobot(City c, int st, int av, Direction d, MenuCity g) {
         super(c, st, av, d);
+        this.g = g;
     }
 	
-	public void breakRobot()
-    {
-        super.breakRobot("Oh no!");
-    }
+	public void breakRobot(){
+        g.ss.doClick();
+        try {
+			super.breakRobot("Ahhhgg!");
+		} catch (Exception e) {
+	        int choice = JOptionPane.showConfirmDialog(null,"You Lose! \n Restart game?","Game Over", JOptionPane.YES_NO_OPTION);
+	        if (choice == JOptionPane.YES_OPTION) {
+	            g.restart("Easy");
+	        }
+	         else{
+	                 System.exit(0);
+	         }
+		}
+     }
 	
     public void moveUp()
     {
@@ -129,10 +138,8 @@ public class PlayerRobot extends SmartRobot
 
     @Override
     public void move() {
-        Thread t = new Thread(() -> {
-        	if(this.frontIsClear()){
-        	super.move();
-        	}
+        Thread t = new Thread(() -> { 
+        	super.justMove();
         });
         t.start();
     }   

@@ -5,6 +5,8 @@ import test.ImageIcon;
 
 import static dit948.Random.*;
 
+import java.util.Random;
+
 public class PrizeCity extends City {
 
     int size;
@@ -22,15 +24,30 @@ public class PrizeCity extends City {
         putWalls();
 
     }
-
-    void distributePrizes() {
-
-      
-            Prize p = new Prize(this, randomInt(size), randomInt(size));
-            p.setIcon(new ImageIcon());
-
-        }
     
+    public int getRandomWithExclusion(Random rnd, int start, int end, int[] exclude) {
+        int random = start + rnd.nextInt(end - start + 1 - exclude.length);
+        for (int ex : exclude) {
+            if (random < ex) {
+                break;
+            }
+            random++;
+        }
+        return random;
+    }
+
+
+    void distributePrizes(){
+    	Random rand1 = new Random();
+        Random rand2 = new Random();
+     
+        int[] ex = { 3, 4, 5, 6 };
+        int prizeRand = getRandomWithExclusion(rand1, 0, 10, ex);
+        int prizeRand2 = getRandomWithExclusion(rand2, 0, 10, ex);
+                       
+            Prize p = new Prize(this, prizeRand, prizeRand2);
+            p.setIcon(new ImageIcon());
+        }
 
     void putWalls() {
 
@@ -42,17 +59,4 @@ public class PrizeCity extends City {
         }
 
     }
-
-//    public static void main(String[] args) {
-//
-//        PrizeCity world = new BombCity(11, 10);
-//        RandomRobot rob = new RandomRobot(world, 5, 5, Direction.NORTH);
-//        for (int i = 0; i < 1000; i++) {
-//            rob.randomMove();
-//            rob.pickThing();
-//        }
-//
-//
-//    }
-
 }

@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.BrokenBarrierException;
-
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -20,7 +17,6 @@ import becker.robots.Direction;
 import becker.robots.icons.BrokenIcon;
 
 public class MenuCity extends CityInFrame {
-	//private static final AbstractButton  = null;
 	JButton pick;
 	JButton left;
 	JButton right;
@@ -36,9 +32,18 @@ public class MenuCity extends CityInFrame {
 	public MenuCity() {
         super();
     }
-	
+	public void addCity(){
+		super.addCity();
+        rob = new ThreadedRobot(prizeCity,(int) (Math.random()*size),(int) (Math.random()*size), Direction.NORTH);
+        rob.setColor(Color.MAGENTA);
+        player = new PlayerRobot(prizeCity,5,5,Direction.SOUTH, this);
+        player.move(0);
+        rob.setSpeed(player.getSpeed() / 5);
+        Thread robThread = new Thread(rob);
+        robThread.start();	        
+
+	}
 	public void restart(String dificulty) {
-//		frame.remove(mainpanel);
         addMainPanel();
         addCity();
         addMenu();
@@ -61,15 +66,9 @@ public class MenuCity extends CityInFrame {
         rob.setColor(Color.BLACK);
         rob.setSpeed(player.getSpeed());
         break;   
-        }
-
-        
-        
+        }    
     }
 	public JMenu makeActionsMenu() {
-
-        // first create the menu items..        
-        ss = new JButton();
         ss = roboComps.getStartStopButton();
         ss.doClick();
         
@@ -110,8 +109,6 @@ public class MenuCity extends CityInFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				restart("Medium");
-				//rob.setSpeed(player.getSpeed() / 2);
-
 			}
 		});
         hard.addActionListener(new ActionListener() {
@@ -120,8 +117,6 @@ public class MenuCity extends CityInFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				restart("Hard");
-				//rob.setSpeed(player.getSpeed());
-
 			}
 		});
         easy.setSelected(true);
@@ -184,14 +179,21 @@ public class MenuCity extends CityInFrame {
 					player.pickThing();
 					if(player.countThingsInBackpack() > 0){
 						ss.doClick();
-						rob.setIcon(new BrokenIcon(rob.getIcon()));
-						int choice = JOptionPane.showConfirmDialog(null, "You Win! \n Restart game?", "Game Over", JOptionPane.YES_NO_OPTION);
-			            if (choice == JOptionPane.YES_OPTION){
-			            	restart("Easy");
-			            }
-			            else{
-			                System.exit(0);
-			            }
+						
+						try {
+							rob.breakRobot();
+						} catch (Exception e2) {
+							int choice = JOptionPane.showConfirmDialog(null, "You Win! \n Restart game?", "Game Over", JOptionPane.YES_NO_OPTION);
+				            if (choice == JOptionPane.YES_OPTION){
+				            	restart("Easy");
+				            }
+				            else{
+				                System.exit(0);
+				            }
+
+						}
+						
+						//rob.setIcon(new BrokenIcon(rob.getIcon()));
 					}
 					
 				}
